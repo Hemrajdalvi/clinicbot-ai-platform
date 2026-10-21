@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2026_10_19_143116) do
+ActiveRecord::Schema[7.1].define(version: 2026_10_21_221532) do
   # These extensions should be enabled to support this database
   enable_extension "pg_stat_statements"
   enable_extension "pg_trgm"
@@ -767,6 +767,23 @@ ActiveRecord::Schema[7.1].define(version: 2026_10_19_143116) do
     t.string "phone_number_health_error", limit: 500
     t.index ["phone_number_health_checked_at"], name: "index_channel_whatsapp_on_phone_number_health_checked_at"
     t.index ["phone_number"], name: "index_channel_whatsapp_on_phone_number", unique: true
+  end
+
+  create_table "clinic_appointments", force: :cascade do |t|
+    t.integer "account_id", null: false
+    t.integer "contact_id"
+    t.string "provider_name", null: false
+    t.string "service_name", null: false
+    t.datetime "starts_at", null: false
+    t.datetime "ends_at", null: false
+    t.integer "amount_rupees", default: 0, null: false
+    t.string "status", default: "available", null: false
+    t.string "source", default: "manual", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id", "provider_name", "starts_at"], name: "index_clinic_appointments_on_active_provider_slot", unique: true, where: "status IN ('available', 'requested', 'confirmed')"
+    t.index ["account_id", "starts_at"], name: "index_clinic_appointments_on_account_id_and_starts_at"
+    t.index ["contact_id", "starts_at"], name: "index_clinic_appointments_on_contact_id_and_starts_at"
   end
 
   create_table "companies", force: :cascade do |t|
@@ -1733,6 +1750,8 @@ ActiveRecord::Schema[7.1].define(version: 2026_10_19_143116) do
   add_foreign_key "campaign_recipients", "campaigns", on_delete: :cascade
   add_foreign_key "campaign_recipients", "contacts", on_delete: :cascade
   add_foreign_key "campaign_recipients", "inboxes", on_delete: :cascade
+  add_foreign_key "clinic_appointments", "accounts", on_delete: :cascade
+  add_foreign_key "clinic_appointments", "contacts", on_delete: :cascade
   add_foreign_key "conversation_monitor_daily_usages", "accounts", on_delete: :cascade
   add_foreign_key "conversation_monitor_evaluations", "accounts", on_delete: :cascade
   add_foreign_key "conversation_monitor_evaluations", "conversation_monitors", column: "monitor_id", on_delete: :cascade
