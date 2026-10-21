@@ -602,6 +602,13 @@ const menuItems = computed(() => {
         ]
       : []),
     {
+      name: 'Appointments',
+      label: t('SIDEBAR.APPOINTMENTS'),
+      icon: 'i-lucide-calendar-clock',
+      to: accountScopedRoute('clinic_appointments_index'),
+      activeOn: ['clinic_appointments_index'],
+    },
+    {
       name: 'Contacts',
       label: t('SIDEBAR.CONTACTS'),
       icon: 'i-lucide-contact',

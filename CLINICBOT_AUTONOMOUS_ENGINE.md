@@ -1,11 +1,24 @@
-# ClinicBot AI — Autonomous Dead-Slot & Revenue Recovery Engine
+# ClinicBot AI — Product Blueprint and Delivery Status
 
-## 1. Category-Defining SaaS + FinTech Arbitrage Model
-Instead of selling a passive ₹5,000/month chatbot, **ClinicBot AI** operates as an **Autonomous Revenue Recovery Engine** for dental, dermatology, orthopedic, and multi-specialty clinics:
-- **Dead-Slot Arbitrage Radar**: Scans unfilled doctor chair slots in the next 24–48 hours and cross-matches them with missed calls, ghosted WhatsApp price inquiries, and overdue treatment recalls.
-- **Multilingual AI Triage (Hinglish, Marathi, English)**: Automatically negotiates slot confirmation on WhatsApp and collects a ₹500 refundable consultation deposit via instant UPI link.
-- **Hybrid Monetization (₹1 Crore+/Month Scale)**: ₹14,999/month Base SaaS Retainer + 10% Performance Revenue Share on every empty chair slot filled by ClinicBot AI.
+## Product goal
 
-## 2. Contact & Brand Identity
-- **Brand**: ClinicBot AI
-- **Official Contact**: clinicbot.ai@gmail.com
+Help clinics handle patient conversations and make better use of available appointment time. The platform is based on Chatwoot's account-scoped inbox, contacts, and channel integrations.
+
+## Available in this repository
+
+- ClinicBot AI installation branding.
+- A clinic appointment board for publishing open slots, booking existing patient contacts, tracking appointment status, and rescheduling cancelled or missed appointments.
+- The underlying Chatwoot inbox and its configured channels, including WhatsApp where a clinic has connected and approved a WhatsApp Business account.
+
+The appointment board records estimated visit value only. It does not process payments, create UPI links, message patients automatically, or infer appointment availability from conversations. Teams open the patient's latest conversation and confirm bookings through their connected inbox.
+
+## Production integrations still required
+
+- Each clinic must connect and verify its own WhatsApp Business account and approved message templates before WhatsApp messages can be sent.
+- UPI collection requires a merchant payment provider, business verification, credentials, webhook verification, and a refund workflow.
+- Automated slot matching and reminders require clinic-configured services, provider schedules, patient consent, and delivery rules.
+- Production hosting needs a secured database, Redis, encrypted secrets, backups, monitoring, and a public HTTPS domain.
+
+## Privacy and product boundaries
+
+Appointment records link to a patient contact and store scheduling details and an estimated value. Do not put diagnoses, treatment notes, or other clinical records in the appointment service label. Follow the clinic's retention and patient-consent policies for contact and messaging data.

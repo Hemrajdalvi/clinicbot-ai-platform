@@ -179,6 +179,7 @@ Rails.application.routes.draw do
               get 'analytics/contacts', to: 'campaigns/analytics#contacts'
             end
           end
+          resources :clinic_appointments, only: [:index, :create, :update, :destroy]
           resources :dashboard_apps, only: [:index, :show, :create, :update, :destroy]
           namespace :channels do
             resource :twilio_channel, only: [:create]

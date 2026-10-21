@@ -1,11 +1,52 @@
 <img src="./.github/screenshots/header.png#gh-light-mode-only" width="100%" alt="Header light mode"/>
 <img src="./.github/screenshots/header-dark.png#gh-dark-mode-only" width="100%" alt="Header dark mode"/>
 
-___
+---
 
-# ClinicBot AI — Omnichannel WhatsApp & AI Receptionist SaaS Platform
+# ClinicBot AI — Clinic Messaging and Appointment Recovery
 
-Omnichannel WhatsApp & AI Receptionist SaaS Platform.
+ClinicBot AI is a clinic-focused customer communication platform built on the open-source Chatwoot inbox. It brings patient conversations and a practical appointment workflow into one workspace.
+
+## Clinic appointments
+
+The clinic appointment board is available from **Appointments** in the account sidebar. Clinic teams can:
+
+- Publish open appointment slots and book them against existing patient contacts.
+- Track requested, confirmed, completed, cancelled, and no-show appointments.
+- See open slots in the next 48 hours and move cancelled or missed bookings into a rescheduling queue.
+- Open a patient's latest inbox conversation to confirm or follow up with them.
+- Track estimated visit value for confirmed appointments. This is an estimate, not a payment record.
+
+The board uses the account's existing contacts. It stores appointment time, provider, service label, status, and estimated value. It is not a medical record system and should not be used to store diagnoses or clinical notes.
+
+WhatsApp messaging remains connected through the existing Chatwoot WhatsApp inbox. Confirmation messages, UPI deposits, automated slot matching, and reminder delivery require clinic/provider configuration and are not enabled by the appointment board alone.
+
+## Run locally
+
+The development stack uses Docker Compose with Rails, PostgreSQL 16, Redis, Sidekiq, and Vite. On Windows, Docker Desktop needs its WSL 2 backend enabled.
+
+1. Copy `.env.example` to `.env`, set a private `SECRET_KEY_BASE` and `REDIS_PASSWORD`, and set `ENABLE_ACCOUNT_SIGNUP=true` for the first local account.
+2. Start the infrastructure and prepare the database:
+
+   ```sh
+   docker compose up -d postgres redis mailhog
+   docker compose run --rm --no-deps rails bundle exec rails db:prepare
+   ```
+
+3. Start the app:
+
+   ```sh
+   docker compose up --build
+   ```
+
+4. Open [http://localhost:3000](http://localhost:3000), create the local account, and choose **Appointments** in the sidebar.
+
+Keep signup disabled on a public installation. WhatsApp requires a clinic-owned, verified WhatsApp Business connection. UPI collection is not implemented in this repository yet.
+
+## Platform base
+
+The inbox screenshots and many support features below come from the Chatwoot base platform; they are not screenshots of the ClinicBot appointment board.
+
 <p>
   <img src="https://img.shields.io/circleci/build/github/chatwoot/chatwoot" alt="CircleCI Badge">
     <a href="https://hub.docker.com/r/chatwoot/chatwoot/"><img src="https://img.shields.io/docker/pulls/chatwoot/chatwoot" alt="Docker Pull Badge"></a>
@@ -17,7 +58,6 @@ Omnichannel WhatsApp & AI Receptionist SaaS Platform.
   <a href="https://status.chatwoot.com"><img src="https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Fchatwoot%2Fstatus%2Fmaster%2Fapi%2Fchatwoot%2Fresponse-time.json" alt="response time"></a>
   <a href="https://artifacthub.io/packages/helm/chatwoot/chatwoot"><img src="https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/artifact-hub" alt="Artifact HUB"></a>
 </p>
-
 
 <p>
   <a href="https://heroku.com/deploy?template=https://github.com/chatwoot/chatwoot/tree/master" alt="Deploy to Heroku">
@@ -63,6 +103,7 @@ Publish help articles, FAQs, and guides through the built-in Help Center Portal.
 - Agent Capacity Management to balance workload across the team.
 
 #### Customer Data & Segmentation
+
 - Contact Management with profiles and interaction history.
 - Contact Segments and Notes for targeted communication.
 - Campaigns to proactively engage customers.
@@ -70,6 +111,7 @@ Publish help articles, FAQs, and guides through the built-in Help Center Portal.
 - Pre-Chat Forms to collect user information before starting conversations.
 
 #### Integrations
+
 - Slack Integration to manage conversations directly from Slack.
 - Dialogflow Integration for chatbot automation.
 - Dashboard Apps to embed internal tools within Chatwoot.
@@ -78,11 +120,11 @@ Publish help articles, FAQs, and guides through the built-in Help Center Portal.
 - Create and manage Linear tickets within Chatwoot.
 
 #### Reports & Insights
+
 - Live View of ongoing conversations for real-time monitoring.
 - Conversation, Agent, Inbox, Label, and Team Reports for operational visibility.
 - CSAT Reports to measure customer satisfaction.
 - Downloadable Reports for offline analysis and reporting.
-
 
 ## Documentation
 
@@ -106,7 +148,6 @@ Deploying Chatwoot to Heroku is a breeze. It's as simple as clicking this button
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/chatwoot/chatwoot/tree/master)
 
 Follow this [link](https://www.chatwoot.com/docs/environment-variables) to understand setting the correct environment variables for the app to work with all the features. There might be breakages if you do not set the relevant environment variables.
-
 
 ### DigitalOcean 1-Click Kubernetes deployment
 
@@ -134,5 +175,4 @@ Thanks goes to all these [wonderful people](https://www.chatwoot.com/docs/contri
 
 <a href="https://github.com/chatwoot/chatwoot/graphs/contributors"><img src="https://opencollective.com/chatwoot/contributors.svg?width=890&button=false" /></a>
 
-
-*Chatwoot* &copy; 2017-2026, Chatwoot Inc - Released under the MIT License.
+_Chatwoot_ &copy; 2017-2026, Chatwoot Inc - Released under the MIT License.
