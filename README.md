@@ -3,10 +3,9 @@
 
 ___
 
-# Chatwoot
+# ClinicBot AI — Omnichannel WhatsApp & AI Receptionist SaaS Platform
 
-The modern customer support platform, an open-source alternative to Intercom, Zendesk, Salesforce Service Cloud etc.
-
+Omnichannel WhatsApp & AI Receptionist SaaS Platform.
 <p>
   <img src="https://img.shields.io/circleci/build/github/chatwoot/chatwoot" alt="CircleCI Badge">
     <a href="https://hub.docker.com/r/chatwoot/chatwoot/"><img src="https://img.shields.io/docker/pulls/chatwoot/chatwoot" alt="Docker Pull Badge"></a>
